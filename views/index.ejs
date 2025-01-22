@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Short URL Maker</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Short URL Maker</h1>
+    <form id="urlForm">
+      <label for="urlInput">Enter URL to shorten:</label>
+      <input type="url" id="urlInput" placeholder="Enter a long URL" required>
+      <button type="submit">Shorten URL</button>
+    </form>
+    <div id="shortenedUrlContainer" class="result-container" style="display: none;">
+      <p>Your shortened URL:</p>
+      <a href="" id="shortenedUrl" target="_blank"></a>
+    </div>
+  </div>
+
+  <!-- <script>
+    // Handle form submission
+    document.getElementById('urlForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get the URL input value
+      const longUrl = document.getElementById('urlInput').value;
+
+      // Here, we're simulating the shortening process (in reality, you'd call an API)
+      const shortUrl = `http://short.ly/${longUrl.slice(-6)}`;  // Fake shortening logic
+
+      // Display the shortened URL
+      const shortenedUrlContainer = document.getElementById('shortenedUrlContainer');
+      const shortenedUrlLink = document.getElementById('shortenedUrl');
+      shortenedUrlLink.href = shortUrl;
+      shortenedUrlLink.textContent = shortUrl;
+
+      shortenedUrlContainer.style.display = 'block';
+    });
+  </script> -->
+</body>
+</html>
