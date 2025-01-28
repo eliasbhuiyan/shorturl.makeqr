@@ -6,7 +6,7 @@ const renderUrl = async (req, res)=>{
     const existUrl = await ShortUrlSchema.findOneAndUpdate({shortID}, {$push: {visitHistory:{clickedAt: Date.now()}}}, {new: true})    
 
     if(!existUrl){
-     return  res.status(404).send("Page not found!")
+     return  res.render('error', {error: "We couldn't find the page you're looking for."});
     }
     
     

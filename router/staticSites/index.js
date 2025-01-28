@@ -5,7 +5,7 @@ const homePage = (req, res) => {
 }
 const loginPage = (req, res) => {
 
-    res.render('registration');
+    res.render('login');
 
 }
 
