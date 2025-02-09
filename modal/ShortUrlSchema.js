@@ -10,6 +10,10 @@ const shortUrl = new Schema({
     type: String,
     required: true
   },
+  author: {
+    ref: "User",
+    type: Schema.Types.ObjectId,
+  },
   visitHistory: [
     {
      clickedAt:{

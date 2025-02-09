@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 const loginUser = async (req, res)=>{
     try {
         const {email, password} = req.body;
+        // Aaaaaaaa1
         if(!email){
             return res.status(400).send({error: "Email is required!"})
         }
@@ -27,7 +28,7 @@ const loginUser = async (req, res)=>{
         // Check password
         const match = await bcrypt.compare(password, existingUser.password);
         if(!match){
-        return res.status(400).send({message: "User not found!"})
+         return res.status(400).send({message: "User not found!"})
         }
         // Access Token    
         const access_token = jwt.sign({
@@ -37,7 +38,11 @@ const loginUser = async (req, res)=>{
             }
         }, process.env.JWT_KEY, { expiresIn: '1d' });
 
-        const loggedUser = await registrationSchema.findOne({email: existingUser.email}).select("-password")
+        const loggedUser = {
+            id: existingUser._id,
+            email: existingUser.email,
+            fullName: existingUser.fullName
+        }
 
         res.status(200).cookie("access_token", access_token).send({message: "Login Successfully", access_token, loggedUser})
     } catch (error) {
