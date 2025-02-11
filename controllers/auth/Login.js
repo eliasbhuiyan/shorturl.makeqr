@@ -44,7 +44,7 @@ const loginUser = async (req, res)=>{
             fullName: existingUser.fullName
         }
 
-        res.status(200).cookie("access_token", access_token).send({message: "Login Successfully", access_token, loggedUser})
+        res.status(200).cookie("access_token", access_token).redirect("/")
     } catch (error) {
       return res.status(400).send({error: "Server side error! please try again."})
     }

@@ -1,21 +1,7 @@
 const generateShortId = require("../../helpers/generateShortId");
 const isUrlValid = require("../../helpers/isUrlValid");
-const validateUser = require("../../middlewares/authMiddleware");
+const registrationSchema = require("../../modal/registrationSchema");
 const ShortUrlSchema = require("../../modal/ShortUrlSchema");
-const loggedUser = ()=>{
-    try {
-        const token = req.cookies
-        if(!token.access_token) return res.status(400).send("Unauthorized")
-
-       var decoded = jwt.verify(token.access_token, process.env.JWT_KEY);
-    
-        if(decoded.data){
-            return decoded.data
-        }
-  } catch (error) {
-        return false 
-    }
-}
 const MakeShortUrl = async (req, res)=>{
     const {url} = req.body;
     
@@ -30,9 +16,32 @@ const MakeShortUrl = async (req, res)=>{
         })
     }
     const shorted = generateShortId(url)
-    const userData = loggedUser()
-    if(userData){
-      
+    if(req.user){
+        const existUrl = await ShortUrlSchema.findOneAndUpdate({url}, {$set: {shortID: shorted}},  { new: true })
+        if(existUrl){
+            return res.render("index", {
+                message: "Short Url created successfully!",
+                longUrl: existUrl.url,
+                shortUrl: `http://localhost:8000/${existUrl.shortID}`,
+                loggedUser: req.user
+            })
+        }
+     
+        const shortUrl = new ShortUrlSchema({
+            url: url,
+            shortID: shorted,
+            isAuth: true
+        })
+    
+        shortUrl.save()
+
+        await registrationSchema.findByIdAndUpdate(req.user.id, {$push: { shorrtUrls: shortUrl._id}})
+       
+        res.render("index", {
+            message: "Short Url created successfully!",
+            longUrl: shortUrl.url,
+            shortUrl: `http://localhost:8000/${shortUrl.shortID}`
+        })
     }
     else{
         const existUrl = await ShortUrlSchema.findOneAndUpdate({url}, {$set: {shortID: shorted}},  { new: true })

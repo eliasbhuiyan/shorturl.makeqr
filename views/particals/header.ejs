@@ -10,7 +10,11 @@
     <nav>
         <ul>
             <li><a href="/">Short URL</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/registration">Registration</a></li>
+            <% if(locals.loggedUser){ %>
+                <li><a href="/dashboard">Dashboard</a></li>
+            <% } else{ %>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/registration">Registration</a></li>
+            <% } %>
         </ul>
     </nav>

@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const registration = async (req, res)=>{
     const {fullName, email, password} = req.body;
+    console.log(fullName, email, password);
+    
     try {
         if(!fullName){
             return res.status(400).send({error: "Name is required!"})
@@ -33,7 +35,7 @@ const registration = async (req, res)=>{
              fullName, email, password: hash
             })
             users.save()
-            res.status(200).send({message: "Registration Successfull."})
+            res.redirect("/login")
         });
     } catch (error) {
        return res.status(400).send({error: "Server side error! please try again."})
