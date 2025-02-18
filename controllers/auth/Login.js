@@ -38,12 +38,6 @@ const loginUser = async (req, res)=>{
             }
         }, process.env.JWT_KEY, { expiresIn: '1d' });
 
-        const loggedUser = {
-            id: existingUser._id,
-            email: existingUser.email,
-            fullName: existingUser.fullName
-        }
-
         res.status(200).cookie("access_token", access_token).redirect("/")
     } catch (error) {
       return res.status(400).send({error: "Server side error! please try again."})

@@ -3,6 +3,7 @@ const apiRoute = require('./api');
 const {renderUrl} = require('../controllers/shorturl/renderUrl');
 const { homePage, loginPage, registrationPage } = require('./staticSites');
 const validateUser = require('../middlewares/authMiddleware');
+const registrationSchema = require('../modal/registrationSchema');
 const router = express.Router();
 
 router.use(process.env.BASE_API_URL, apiRoute)
@@ -12,9 +13,21 @@ router.get('/', validateUser, homePage);
 router.get('/login', loginPage);
 router.get('/registration', registrationPage);
 
+router.post("/logout", (req, res)=>{
+  res.clearCookie("access_token")
+})
 
 router.get("/dashboard", validateUser,  async (req, res)=>{
-  res.send(req.user)
+  if(req.user){
+    const userData = await registrationSchema.findById(req.user.id).select("-password").populate("shorrtUrls")
+    res.render("dashboard",  {
+      urlHistory: userData,
+      loggedUser: req.user
+    });
+  }else{
+
+    res.redirect("/login")
+  }
 })
 
 router.get("/:shortId", renderUrl)
