@@ -13,8 +13,8 @@ router.get('/', validateUser, homePage);
 router.get('/login', loginPage);
 router.get('/registration', registrationPage);
 
-router.post("/logout", (req, res)=>{
-  res.clearCookie("access_token")
+router.get("/logout", (req, res)=>{
+  res.clearCookie("access_token").redirect("/login")
 })
 
 router.get("/dashboard", validateUser,  async (req, res)=>{

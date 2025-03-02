@@ -12,22 +12,10 @@
             <li><a href="/">Short URL</a></li>
             <% if(locals.loggedUser){ %>
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><button class="logout">Log Out</button></li>
+                <li><a href="/logout" class="logout">Log Out</a></li>
             <% } else{ %>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/registration">Registration</a></li>
             <% } %>
         </ul>
     </nav>
-
-<script>
-    const logout = document.querySelector(".logout")
-    if(logout) {
-        logout.addEventListener("click", async ()=>{
-            
-            await fetch("http://localhost:8000/logout", {
-            method: "POST",
-            });              
-        })
-   }
-</script>
