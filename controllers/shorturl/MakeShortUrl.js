@@ -5,6 +5,7 @@ const ShortUrlSchema = require("../../modal/ShortUrlSchema");
 const MakeShortUrl = async (req, res)=>{
     const {url} = req.body;
     
+   try {
     if(!url){
         return res.render("index", {
             error: "URL is required!",
@@ -67,6 +68,9 @@ const MakeShortUrl = async (req, res)=>{
             shortUrl: `http://localhost:8000/${shortUrl.shortID}`
         })
     }
+   } catch (error) {
+    console.log("error");
+   }
 }
 
 
