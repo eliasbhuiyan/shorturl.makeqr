@@ -1,0 +1,26 @@
+<%- include("./particals/header.ejs") %>
+    <div class="container">
+        <h1>Visit History</h1>
+        <% if(locals.urlHistory){ %>
+            <div class="userInfo">
+                <h2><%= urlHistory.fullName %></h2>
+                <p><%= urlHistory.email %></p>
+            </div>
+            <% urlHistory.shorrtUrls.forEach(item => { %>
+              <div class="url-card">
+                    <h2>URL: <%= item.url  %></h2>
+                    <h2>Short URL: http://localhost:8000/<%= item.shortID  %></h2>
+                    <h3>Total Visit: <%= item.visitHistory.length %></h3>
+                    <h3>Visit History: </h3>
+                    <ul>
+                        <% item.visitHistory.forEach(element => { %>
+                            <li><%= element.clickedAt.toLocaleString() %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    <%- include("./particals/footer.ejs") %>
+</body>
+</html>

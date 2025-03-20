@@ -3,8 +3,8 @@ const registration = require('../../controllers/auth/Registration');
 const loginUser = require('../../controllers/auth/Login');
 const authRoute = express.Router();
 
-authRoute.get("/registration", registration)
+authRoute.post("/registration", registration)
 
-authRoute.get("/login", loginUser)
+authRoute.post("/login", loginUser)
 
 module.exports = authRoute;

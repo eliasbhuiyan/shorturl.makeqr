@@ -140,7 +140,7 @@ footer {
 
 .reg-log {
   width: 340px;
-  height: 400px;
+  height: 450px;
   background: #2c2c2c;
   padding: 47px;
   padding-bottom: 57px;
@@ -261,4 +261,101 @@ footer {
     transform: translateY(-20px);
     opacity: 0;
   }
+}
+/* Error page */
+
+.error-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.error-title {
+  font-size: 80px;
+  font-weight: bold;
+  color: #f44;
+  margin-bottom: 10px;
+}
+
+.error-message {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.error-description {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #777;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-home, .btn-contact {
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-home:hover, .btn-contact:hover {
+  background-color: #2980b9;
+}
+.userInfo{
+  border: 1px solid #dddddd;
+  padding: 20px 0;
+  border-radius: 20px;
+}
+.url-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  padding: 20px;
+  border-left: 5px solid #4CAF50;
+  text-align: start;
+}
+
+.url-card h2 {
+  color: #4CAF50;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+.url-card h3 {
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.url-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.url-card ul li {
+  background-color: #f9f9f9;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+  color: #777;
+}
+
+.logout{
+  color: #fff;
+  padding: 0;
+  font-size: 18px;
+  border-radius: none;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
 }

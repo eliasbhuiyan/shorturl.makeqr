@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short URL Maker</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Short URL</a></li>
+            <% if(locals.loggedUser){ %>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout" class="logout">Log Out</a></li>
+            <% } else{ %>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/registration">Registration</a></li>
+            <% } %>
+        </ul>
+    </nav>

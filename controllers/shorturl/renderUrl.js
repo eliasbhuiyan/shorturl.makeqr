@@ -3,28 +3,20 @@ const ShortUrlSchema = require("../../modal/ShortUrlSchema");
 const renderUrl = async (req, res)=>{
     const shortID = req.params.shortId;
 
-    const existUrl = await ShortUrlSchema.findOneAndUpdate({shortID}, {$push: {visitHistory:{clickedAt: Date.now()}}}, {new: true})    
-
-    if(!existUrl){
-     return  res.status(404).send("Page not found!")
-    }
-    
-    
-
-   res.redirect(existUrl.url)
-    
-}
-
-const visitHistory = async (req, res)=>{
-    const shortID = req.params.shortId;
-
     const existUrl = await ShortUrlSchema.findOne({shortID})    
 
     if(!existUrl){
-     return  res.status(404).send("ID not found!")
+     return  res.render('error', {error: "We couldn't find the page you're looking for."});
     }
 
-    res.send(existUrl)
+    if(existUrl.isAuth){
+        const url = await ShortUrlSchema.findByIdAndUpdate(existUrl._id, {$push: {visitHistory:{clickedAt: Date.now()}}}, {new: true} )
+        res.redirect(url.url)
+    }
+    else{
+        res.redirect(existUrl.url)
+    }
 }
 
-module.exports = {renderUrl, visitHistory};
+
+module.exports = {renderUrl};

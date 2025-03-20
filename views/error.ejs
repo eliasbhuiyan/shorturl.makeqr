@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+<%- include("./particals/header.ejs") %>
+    <div class="error-container">
+        <div class="error-content">
+            <h1 class="error-title">Oops! 404</h1>
+            <% if(locals.error) { %>
+               <p class="error-message"> <%= error %> </p>
+            <% } %>
+            <p class="error-description">The page may have been moved or deleted. Please check the URL or use one of the options below:</p>
+            <div class="error-actions">
+                <a href="/" class="btn-home">Go to Homepage</a>
+            </div>
+        </div>
+    </div>
+    <%- include("./particals/footer.ejs") %>
 </body>
 </html>

@@ -1,30 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Short URL Maker</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="#">Short URL</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Registration</a></li>
-        </ul>
-    </nav>
-
+<%- include("./particals/header.ejs") %>
     <div class="container">
         <h1>Short URL Maker</h1>
-        <form class="url-input" action="http://localhost:8000/api/v1/generate/shortUrl" method="post">
-            <input class="long-url" type="text" placeholder="Paste your long URL here" name="url" value="<%= locals.longUrl %>">
+        <form class="url-input" action="/api/v1/generate/shortUrl" method="post">
+            <input required class="long-url" type="text" placeholder="Paste your long URL here" name="url" value="<%= locals.longUrl %>">
             <button type="submit">Generate</button>
         </form>
         <% if (locals.error) { %>
             <p class="error"><%= error %></p>         
         <% } %>
-
         <% if(locals.shortUrl){ %>
             <div class="short-link">
                 <p>Your Short Link:</p>
@@ -38,10 +21,7 @@
             <button class="backtoHome" onclick="backtoHome()">Generate New</button>
        <% } %>
     </div>
-    <footer>
-        &copy; 2025 Short URL Maker. All rights reserved.
-    </footer>
-
+   <%- include("./particals/footer.ejs") %>
     <script>
            function copyShortLick () {
                 const shortUrl = document.querySelector('.link a').href;
